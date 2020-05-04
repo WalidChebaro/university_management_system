@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "993828411249",
+    "firebase_url": "https://se-project-lau.firebaseio.com",
+    "project_id": "se-project-lau",
+    "storage_bucket": "se-project-lau.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993828411249:android:323a9c3c1513dfc95a88d0",
+        "android_client_info": {
+          "package_name": "com.se_project_lau.university_management_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993828411249-28g009ohljkqr8qmt506g1stn7j8fh7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaDJlSEXJI8qgBp790aqLFM7IQCfln3xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "993828411249-28g009ohljkqr8qmt506g1stn7j8fh7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
