@@ -32,6 +32,7 @@ class _TestPageState extends State<TestPage> {
       print(e);
     }
   }
+
   User user = new User();
   @override
   Widget build(BuildContext context) {
@@ -49,43 +50,6 @@ class _TestPageState extends State<TestPage> {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Row(
-                children: <Widget>[
-                  new Expanded(
-                    child: new TextField(
-                      decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Email',
-                        hintStyle: TextStyle(color: Colors.black),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _email = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              new Row(
-                children: <Widget>[
-                  new Expanded(
-                    child: new TextField(
-                      decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Password',
-                        hintStyle: TextStyle(color: Colors.black),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _password = value;
-                        });
-                      },
-                      obscureText: true,
-                    ),
-                  ),
-                ],
-              ),
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -133,25 +97,7 @@ class _TestPageState extends State<TestPage> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          _dateofbirth = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              new Row(
-                children: <Widget>[
-                  new Expanded(
-                    child: new TextField(
-                      decoration: new InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'type',
-                        hintStyle: TextStyle(color: Colors.black),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _type = value;
+                          _dateofbirth = (value);
                         });
                       },
                     ),
@@ -200,14 +146,13 @@ class _TestPageState extends State<TestPage> {
                     child: new TextField(
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
+                        WhitelistingTextInputFormatter.digitsOnly
                       ],
                       decoration: new InputDecoration(
                         border: InputBorder.none,
                         hintText: 'phone',
                         hintStyle: TextStyle(color: Colors.black),
                       ),
-                      
                       onChanged: (value) {
                         setState(() {
                           _phone = int.parse(value);
@@ -265,18 +210,15 @@ class _TestPageState extends State<TestPage> {
                       elevation: 10.0,
                       onPressed: () {
                         user.createNewStaffUser(
-                            _email,
-                            _password,
                             _firstname,
                             _lastname,
                             _dateofbirth,
                             _address,
                             _phone,
-                            _type,
+                            _role,
                             _campus,
                             _office,
-                            _role,
-                            );
+                            0);
                       },
                     ),
                   ),
@@ -293,7 +235,7 @@ class _TestPageState extends State<TestPage> {
                       textColor: Colors.black,
                       elevation: 10.0,
                       onPressed: () {
-                        user.updateMajor(_major,201706710);
+                        user.updateMajor(_major, 201706710);
                       },
                     ),
                   ),

@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'User.dart';
 
 class Student {
@@ -13,19 +11,20 @@ class Student {
   String _major;
   int _phone;
 
-  //Student(this._id, this._uid, this._dateofbirth, this._firstname,
-  //   this._lastname, this._campus, this._address, this._major, this._phone);
+  Future setAttributeValues() async {
+    await User().getUserInfo().then((doc) {
+      _id = doc.documents[0].data['ID'];
+      _uid = doc.documents[0].data['uid'];
+      _firstname = doc.documents[0].data['FirstName'];
+      _lastname = doc.documents[0].data['LastName'];
+      _dateofbirth = DateTime.parse(doc.documents[0].data['DateOfBirth'].toString());
+      _address = doc.documents[0].data['Address'];
+      _phone = doc.documents[0].data['Phone'];
+      _campus = doc.documents[0].data['Campus'];
+      _major = doc.documents[0].data['Major'];
+    });
+  }
 
-  // setAttributeValues() {
-  //   _id = User().getUserInfo('ID');
-  //   _firstname = User().getUserInfo('FirstName');
-  //   _lastname = User().getUserInfo('LastName');
-  //   _dateofbirth = User().getUserInfo('DateOfBirth');
-  //   _address = User().getUserInfo('Address');
-  //   _campus = User().getUserInfo('Campus');
-  //   _major = User().getUserInfo('Major');
-  //   _phone = User().getUserInfo('Phone');
-  // }
 //Getters
   int get id => _id;
   String get uid => _uid;

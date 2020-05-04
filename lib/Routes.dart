@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:university_management_system/StudentPage.dart';
 import 'LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'TestPage.dart';
 import 'User.dart';
 import 'StaffRoutes.dart';
+import 'StudentPage.dart';
 
 class Routes extends StatefulWidget {
   @override
@@ -53,12 +55,14 @@ class _RoutesState extends State<Routes> {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data == 'Student') {
-                  return new TestPage(onSignedOut: _signedOut);
+                  return
+                      //new TestPage(onSignedOut: _signedOut);
+                      new StudentPage(onSignedOut: _signedOut);
                 } else {
                   return new StaffRoutes(onSignedOut: _signedOut);
                 }
               } else {
-                return CircularProgressIndicator();
+                return _buildWaitingScreen();
               }
             });
     }

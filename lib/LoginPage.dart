@@ -1,10 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'rounded_button.dart';
+import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {  
+const kTextFieldDecoration = InputDecoration(
+  hintText: 'Enter a Value',
+  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.tealAccent, width: 1.0),
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.tealAccent, width: 2.0),
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+);
+
+class LoginPage extends StatefulWidget {
   final VoidCallback onSignedIn;
   LoginPage({this.onSignedIn});
-
+  static const String id = "login_screen";
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -12,82 +29,70 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _email;
   String _password;
+  bool showSpinner = false;
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Container(
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
-            colors: [const Color(0xFF4E54C8), const Color(0xFF8F94FB)],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-            stops: [0.0, 1.0],
-          ),
-        ),
-        child: new Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new TextField(
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: Colors.white),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        _email = value;
-                      });
-                    },
-                  ),
-                ),
-              ],
+            Container(
+              child: Text(
+                'MyUni+',
+                style: TextStyle(
+                    color: Colors.teal[400],
+                    fontFamily: 'baskerville',
+                    fontSize: 60.0),
+              ),
             ),
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new TextField(
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.white),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        _password = value;
-                      });
-                    },
-                    obscureText: true,
-                  ),
-                ),
-              ],
+            SizedBox(
+              height: 48.0,
             ),
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                  child: new RaisedButton(
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
-                    child: Text('Login'),
-                    color: Colors.blueGrey,
-                    textColor: Colors.white,
-                    elevation: 10.0,
-                    onPressed: () {
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: _email, password: _password)
-                          .then((AuthResult auth) {
-                        widget.onSignedIn();
-                      }).catchError((e) {
-                        print(e);
-                      });
-                    },
-                  ),
-                ),
-              ],
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              style: TextStyle(color: Colors.black),
+              onChanged: (value) {
+                _email = value;
+              },
+              decoration:
+                  kTextFieldDecoration.copyWith(hintText: 'Enter your Email'),
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            TextField(
+              obscureText: true,
+              style: TextStyle(color: Colors.black),
+              onChanged: (value) {
+                _password = value;
+              },
+              decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Enter your password.'),
+            ),
+            SizedBox(
+              height: 24.0,
+            ),
+            RoundedButton(
+              title: 'Log in',
+              color: Colors.tealAccent,
+              onPressed: () async {
+                setState(() {
+                  showSpinner = true;
+                });
+                FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                        email: _email, password: _password)
+                    .then((AuthResult auth) {
+                  widget.onSignedIn();
+                }).catchError((e) {
+                  print(e);
+                });
+              },
             ),
           ],
         ),
