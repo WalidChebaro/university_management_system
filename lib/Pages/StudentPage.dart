@@ -72,7 +72,7 @@ class _StudentPageState extends State<StudentPage> {
       body: new Scaffold(
           body: SafeArea(
               child: Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -138,6 +138,8 @@ class _StudentPageState extends State<StudentPage> {
                           MaterialPageRoute(
                             builder: (context) => new CoursePage(
                               onSignedOut: widget.onSignedOut,
+                              type: "Student",
+                              student: student,
                             ),
                           ),
                         );
@@ -197,6 +199,7 @@ class _StudentPageState extends State<StudentPage> {
                                 builder: (context) => new PetitionPage(
                                   onSignedOut: widget.onSignedOut,
                                   uid: student.uid,
+                                  type: "Student",
                                 ),
                               ),
                             );

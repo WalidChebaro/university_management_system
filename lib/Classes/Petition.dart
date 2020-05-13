@@ -16,10 +16,10 @@ class Petition {
     });
   }
 
-  Stream<QuerySnapshot> retrievePetitionsByType(String _petitiontype) {
+  Stream<QuerySnapshot> retrievePetitionsByStatus() {
     return Firestore.instance
         .collection('/Petition')
-        .where('PetitionType', isEqualTo: _petitiontype)
+        .where('PetitionStatus', isEqualTo: "Pending")
         .getDocuments()
         .asStream();
   }

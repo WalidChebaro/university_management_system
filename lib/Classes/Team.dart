@@ -4,9 +4,9 @@ import 'dart:math';
 
 class Team {
   var randnb = Random(25);
-  createTeam(String _teamname, String _teamdescription, String _firstName,
+  createTeam(String _teamname, String _teamdescription, String _firstname,
       String _lastname) {
-    String _teamleader = "$_firstName $_lastname";
+    String _teamleader = "$_firstname $_lastname";
     Firestore.instance.collection('/Team').add({
       'TeamName': _teamname,
       'TeamDescription': _teamdescription,

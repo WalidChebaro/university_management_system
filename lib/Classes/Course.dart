@@ -90,21 +90,15 @@ class Course {
 
   addSection(int _coursesection, String _coursename, String _courseinformation,
       int _coursecredithours, String _firstname, String _lastname, int _id) {
-    Firestore.instance
-        .collection('/Course')
-        .where('CourseSection', isEqualTo: _coursesection)
-        .getDocuments()
-        .then((doc) {
-      Firestore.instance.collection('/CourseStudents').add({
-        'ID': _id,
-        'FirstName': _firstname,
-        'LastName': _lastname,
-        'CourseSection': _coursesection,
-        'CourseName': _coursename,
-        'CourseInformation': _courseinformation,
-        'CourseCreditHours': _coursecredithours,
-        'Counter': 0,
-      });
+        String _teachername = "$_firstname $_lastname";
+    Firestore.instance.collection('/Course/CourseSection').add({
+      'ID': _id,
+      'TeacherName': _teachername,
+      'CourseSection': _coursesection,
+      'CourseName': _coursename,
+      'CourseInformation': _courseinformation,
+      'CourseCreditHours': _coursecredithours,
+      'Counter': 0,
     });
   }
 
