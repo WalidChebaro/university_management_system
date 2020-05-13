@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'User.dart';
+import 'package:university_management_system/Classes/User.dart';
 
 class TestPage extends StatefulWidget {
   final VoidCallback onSignedOut;
